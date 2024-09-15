@@ -2,6 +2,13 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Nav from "@/components/nav";
+import StoreProvider from "./StoreProvider";
+import { Jost } from 'next/font/google';
+
+const jost = Jost({
+  subsets: ['latin'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
+});
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,10 +34,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${jost.className} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Nav />
-        {children}
+        <StoreProvider>
+          {children}
+        </StoreProvider>
       </body>
     </html>
   );
