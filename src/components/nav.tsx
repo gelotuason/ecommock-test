@@ -28,17 +28,17 @@ export default function Nav() {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <nav className='flex justify-around items-center gap-1 py-2'>
+        <nav className='flex justify-between items-center py-2 px-3'>
             <Drawer open={isOpen} onOpenChange={setIsOpen} direction='left'>
                 <DrawerTrigger>
-                    <Menu />
+                    <Menu strokeWidth={1} />
                 </DrawerTrigger>
                 <DrawerContent className='h-screen md:w-1/4 border-none bg-secondary'>
                     <DrawerHeader className='flex justify-between items-center bg-primary text-secondary '>
                         <DrawerTitle>Menu</DrawerTitle>
                         <DrawerDescription className='sr-only' />
                         <DrawerClose>
-                            <X />
+                            <X strokeWidth={1} />
                         </DrawerClose>
                     </DrawerHeader>
                     <div className='flex flex-col gap-8 px-6'>
@@ -46,26 +46,26 @@ export default function Nav() {
                             <Button asChild variant="ghost" className='w-full border-b rounded-none flex justify-between py-6'>
                                 <Link href='/'>
                                     Home
-                                    <ChevronRight />
+                                    <ChevronRight strokeWidth={0.5} />
                                 </Link>
                             </Button>
                             <Button asChild variant="ghost" className='w-full border-b rounded-none flex justify-between py-6'>
                                 <Link href='/'>
                                     Shop
-                                    <ChevronRight />
+                                    <ChevronRight strokeWidth={0.5} />
                                 </Link>
                             </Button>
                         </div>
                         <div>
                             <Button variant='ghost' asChild className='w-full border-b rounded-none flex justify-start gap-4 py-6'>
                                 <Link href='/'>
-                                    <Heart className="size-5" />
+                                    <Heart strokeWidth={1} size={20} />
                                     Wishlist
                                 </Link>
                             </Button>
                             <Button variant='ghost' asChild className='w-full border-b rounded-none flex justify-start gap-4 py-6'>
                                 <Link href='/'>
-                                    <User />
+                                    <User strokeWidth={1} />
                                     Login
                                 </Link>
                             </Button>
@@ -76,12 +76,12 @@ export default function Nav() {
 
             <h1 className='text-xl'>ecommock.</h1>
 
-            <div className='flex gap-1'>
+            <div className='flex'>
                 <Button variant='ghost' size='icon'>
-                    <Search />
+                    <Search strokeWidth={1} />
                 </Button>
                 <Button variant='ghost' size='icon'>
-                    <ShoppingCart />
+                    <ShoppingCart strokeWidth={1} />
                 </Button>
             </div>
         </nav>
