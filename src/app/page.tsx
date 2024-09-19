@@ -5,6 +5,7 @@ import Image from "next/image";
 
 // ui component imports
 import SwiperSlides from "@/components/hero";
+import Footer from "@/components/footer";
 
 // icon imports
 import {
@@ -220,6 +221,9 @@ export default function Home() {
           </div>
         </Swiper>
       </section>
+
+      <Footer />
+
     </main>
   );
 }
