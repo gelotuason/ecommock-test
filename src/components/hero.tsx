@@ -8,7 +8,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 
-import '../app/swiper.css';
+import '../app/css/hero-swiper.css';
 
 import Slide1 from '../../public/slides-img-1.jpg';
 import Slide2 from '../../public/slides-img-2.jpg';
