@@ -1,12 +1,11 @@
+import Link from "next/link";
+import { Mail, Linkedin, Github } from "lucide-react";
 import {
     Accordion,
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion";
-
-import { Mail, Linkedin, Github } from "lucide-react";
-import Link from "next/link";
 
 export default function Footer() {
     // TODO: integrate api category on shop highlights
@@ -26,15 +25,23 @@ export default function Footer() {
                         </div>
                     </AccordionContent>
                 </AccordionItem>
-            </Accordion>
 
-            <Accordion type="single" collapsible>
-                <AccordionItem className="border-accent" value="item-1">
+                <AccordionItem className="border-accent" value="item-2">
                     <AccordionTrigger className="text-lg">Quick links</AccordionTrigger>
                     <AccordionContent className="text-accent text-base">
                         <div className="flex flex-col">
                             <Link href='/'>Home</Link>
                             <Link href='/'>Shop</Link>
+                        </div>
+                    </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem className="border-accent" value="item-3">
+                    <AccordionTrigger className="text-lg">Resources</AccordionTrigger>
+                    <AccordionContent className="text-accent text-base">
+                        <div className="flex flex-col">
+                            <Link href='/'>Unsplash</Link>
+                            <Link href='/'>Fake Store API</Link>
                         </div>
                     </AccordionContent>
                 </AccordionItem>
