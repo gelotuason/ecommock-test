@@ -8,7 +8,7 @@ import { Truck, Undo2, CreditCard, PhoneCall, } from "lucide-react";
 export default function Home() {
 
   return (
-    <main className="bg-[#f5f5f5] min-h-screenfont-[family-name:var(--font-geist-sans)]">
+    <main className="min-h-screenfont-[family-name:var(--font-geist-sans)]">
       <Hero />
       {/* services section */}
       <section className="flex flex-col gap-10 justify-center items-center py-12">
