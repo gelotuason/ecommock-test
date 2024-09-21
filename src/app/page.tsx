@@ -1,7 +1,6 @@
 'use client';
 
 import Hero from "@/components/hero";
-import Footer from "@/components/footer";
 import Bestsellers from "@/components/bestsellers";
 
 import { Truck, Undo2, CreditCard, PhoneCall, } from "lucide-react";
@@ -36,7 +35,6 @@ export default function Home() {
       </section>
       {/* end of services section */}
       <Bestsellers />
-      <Footer />
     </main>
   );
 }

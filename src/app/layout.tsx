@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Nav from "@/components/nav";
+import Footer from "@/components/footer";
 import StoreProvider from "./StoreProvider";
 import { Jost } from 'next/font/google';
 
@@ -40,6 +41,7 @@ export default function RootLayout({
         <StoreProvider>
           {children}
         </StoreProvider>
+        <Footer />
       </body>
     </html>
   );
