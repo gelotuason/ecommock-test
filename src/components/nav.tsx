@@ -36,13 +36,7 @@ export default function Nav() {
 
     // search drawer
     // TODO: search functionality
-    // TODO: display products limit (4)
-    // TODO: add more results button
-
-    // cart drawer
-    // TODO: display cart products limit (3)
-    // TODO: apply overflow
-
+    // TODO: add more results button (when user searched)
 
     return (
         <nav className='flex justify-between items-center py-2 px-3'>
@@ -99,7 +93,7 @@ export default function Nav() {
                     <DrawerTrigger>
                         <Search strokeWidth={1} />
                     </DrawerTrigger>
-                    <DrawerContent className='mt-0 top-0 h-max border-none bg-secondary rounded-none'>
+                    <DrawerContent className='mt-0 top-0 border-none bg-secondary rounded-none overflow-auto'>
                         <DrawerHeader>
                             <div className='relative'>
                                 <DrawerTitle className='text-2xl text-center'>Search</DrawerTitle>
@@ -108,7 +102,7 @@ export default function Nav() {
                                 </DrawerClose>
                             </div>
                         </DrawerHeader>
-                        <DrawerDescription className='space-y-4 px-4 py-2 text-center'>
+                        <DrawerDescription className='space-y-4 px-4 text-center py-2'>
                             {/* search input */}
                             <div className='relative'>
                                 <Input type='text' className='border-accent p-5' placeholder='Search products' />
@@ -128,7 +122,39 @@ export default function Nav() {
                             {/* end of quick search categories */}
 
                             {/* product listing */}
-                            <div className='grid grid-cols-2 gap-x-2 gap-y-4'>
+                            <div className='grid grid-cols-2 gap-x-2 gap-y-4 py-4'>
+                                {/* product 1 */}
+                                <div>
+                                    {/* product image */}
+                                    <div className="relative h-[120px] mb-2 py-2">
+                                        <Link
+                                            href='/'
+                                            className=""
+                                        >
+                                            <Image
+                                                src='/slides-img-3.jpg'
+                                                fill
+                                                alt="Best Seller 1"
+                                                className="object-cover"
+                                            />
+                                        </Link>
+                                    </div>
+                                    {/* end of product image */}
+
+                                    {/* product details */}
+                                    <div>
+                                        <p className="text-lg">title</p>
+                                        <div className="flex justify-center">
+                                            {Array.from({ length: 5 }).map(star => (
+                                                <Star fill="black" size={16} />
+                                            ))}
+                                        </div>
+                                        <p className="text-lg">$36.00</p>
+                                    </div>
+                                    {/* end of product details */}
+                                </div>
+                                {/* end of product 1 */}
+
                                 {/* product 1 */}
                                 <div>
                                     {/* product image */}
@@ -279,7 +305,7 @@ export default function Nav() {
                         </DrawerHeader>
 
                         {/* product listing */}
-                        <DrawerDescription className='divide-y px-4'>
+                        <DrawerDescription className='divide-y px-4 overflow-auto'>
                             {/* product 1 */}
                             <div className='flex gap-2 py-2'>
                                 {/* product image */}
@@ -353,6 +379,80 @@ export default function Nav() {
                                 {/* end of delete cart product button */}
                             </div>
                             {/* end of product 2 */}
+
+                            {/* product 2 */}
+                            <div className='flex gap-2 py-2'>
+                                {/* product image */}
+                                <div className='relative h-24 w-24 my-auto'>
+                                    <Image
+                                        src='/slides-img-3.jpg'
+                                        fill
+                                        alt='Cart product'
+                                    />
+                                </div>
+                                {/* end of product image */}
+
+                                {/* cart product details */}
+                                <div className='space-y-2'>
+                                    <p className='text-lg text-black'>Title</p>
+                                    <p className='text-base'>$36.00</p>
+                                    <div className='relative w-3/4'>
+                                        <Input type='number' className='text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none' min={0} defaultValue={1} />
+                                        {/* <div className='absolute inset-y-0 h-full'>test</div> */}
+                                        <Button variant='ghost' className='px-3 absolute inset-y-0 left-0'>
+                                            <Minus size={12} strokeWidth={1} />
+                                        </Button>
+                                        <Button variant='ghost' className='px-3 absolute inset-y-0 right-0'>
+                                            <Plus size={12} strokeWidth={1} />
+                                        </Button>
+                                    </div>
+                                </div>
+                                {/* end of cart product details */}
+
+                                {/* delete cart product button */}
+                                <Button variant='ghost' size='icon' className='w-max h-max px-1 py-1'>
+                                    <Trash2 size={16} strokeWidth={1} />
+                                </Button>
+                                {/* end of delete cart product button */}
+                            </div>
+                            {/* end of product 2 */}
+
+                            {/* product 3 */}
+                            <div className='flex gap-2 py-2'>
+                                {/* product image */}
+                                <div className='relative h-24 w-24 my-auto'>
+                                    <Image
+                                        src='/slides-img-3.jpg'
+                                        fill
+                                        alt='Cart product'
+                                    />
+                                </div>
+                                {/* end of product image */}
+
+                                {/* cart product details */}
+                                <div className='space-y-2'>
+                                    <p className='text-lg text-black'>Title</p>
+                                    <p className='text-base'>$36.00</p>
+                                    <div className='relative w-3/4'>
+                                        <Input type='number' className='text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none' min={0} defaultValue={1} />
+                                        {/* <div className='absolute inset-y-0 h-full'>test</div> */}
+                                        <Button variant='ghost' className='px-3 absolute inset-y-0 left-0'>
+                                            <Minus size={12} strokeWidth={1} />
+                                        </Button>
+                                        <Button variant='ghost' className='px-3 absolute inset-y-0 right-0'>
+                                            <Plus size={12} strokeWidth={1} />
+                                        </Button>
+                                    </div>
+                                </div>
+                                {/* end of cart product details */}
+
+                                {/* delete cart product button */}
+                                <Button variant='ghost' size='icon' className='w-max h-max px-1 py-1'>
+                                    <Trash2 size={16} strokeWidth={1} />
+                                </Button>
+                                {/* end of delete cart product button */}
+                            </div>
+                            {/* end of product 3 */}
 
                             {/* product 3 */}
                             <div className='flex gap-2 py-2'>
