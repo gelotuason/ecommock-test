@@ -50,7 +50,7 @@ const bestsellersSlice = createSlice({
     },
 })
 
-export const fetchBestsellers = createAsyncThunk('categories/fetchBestsellers', async (_, { rejectWithValue }) => {
+export const fetchBestsellers = createAsyncThunk('bestsellers/fetchBestsellers', async (_, { rejectWithValue }) => {
     try {
         const response = await axios.get('https://fakestoreapi.com/products/');
 
