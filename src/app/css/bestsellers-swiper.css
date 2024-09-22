@@ -1,7 +1,7 @@
 .swiper-pagination {
     position: relative;
-    height: 60px;
     display: flex;
     justify-content: center;
     align-items: end;
+    margin-top: 2rem;
 }

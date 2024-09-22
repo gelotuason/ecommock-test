@@ -1,7 +1,9 @@
-import Link from "next/link";
-import Image from "next/image";
+'use client';
 
-import { ShoppingCart, Heart, Search, Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect } from "react";
+import Link from "next/link";
+
+import { ShoppingCart, Heart, Search, ChevronLeft, ChevronRight } from "lucide-react";
 
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
@@ -10,171 +12,88 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import '../app/css/bestsellers-swiper.css';
 
+import { useAppSelector, useAppDispatch } from "@/lib/hooks";
+import { fetchBestsellers } from "@/lib/features/bestsellers/bestsellersSlice";
+
 export default function Bestsellers() {
+    const { products, status, error } = useAppSelector(state => state.bestsellersReducer);
+    const dispatch = useAppDispatch();
 
-    return (
-        <section className="px-3 py-4">
-            <h1 className="text-4xl text-center">Bestsellers</h1>
-            <h2 className="text-lg text-center text-accent mb-4">Collect your loves with our newest arrivals.</h2>
+    useEffect(() => {
+        if (status === 'idle') {
+            dispatch(fetchBestsellers());
+        }
+    }, []);
 
-            {/* product listing */}
-            <Swiper
-                modules={[Navigation, Pagination]}
-                spaceBetween={20}
-                slidesPerView={2}
-                navigation={{ enabled: false }}
-                pagination={{ clickable: true }}
-            >
-                <SwiperSlide>
-                    <div className="text-center space-y-1">
-                        {/* product image */}
-                        <div className="relative h-[120px] mb-4 py-2">
+    // TODO: swiper nav button disabled on last slide
+
+
+    if (status === 'failed') {
+        return (
+            <section className="px-3 py-4">
+                <h1 className="text-4xl text-center">Bestsellers</h1>
+                <h2 className="text-lg text-center text-accent mb-4">Don't miss our bestsellers of the month!</h2>
+                <p className="text-center">{error}</p>
+            </section>
+        )
+    } else {
+        return (
+            <section className="px-3 py-4">
+                <h1 className="text-4xl text-center">Bestsellers</h1>
+                <h2 className="text-lg text-center text-accent mb-4">Don't miss our bestsellers of the month!</h2>
+
+                {/* product listing */}
+                <Swiper
+                    modules={[Navigation, Pagination]}
+                    spaceBetween={10}
+                    slidesPerView={2}
+                    navigation={{ enabled: false }}
+                    pagination={{ clickable: true }}
+                >
+                    {products && products.map((product) => (
+                        <SwiperSlide key={product.id}>
                             <Link
                                 href='/'
-                                className=""
+                                className="bg-white shadow-sm flex bg-center bg-no-repeat h-32 bg-[length:80px_112px]"
+                                style={{
+                                    backgroundImage: `url('${product.image}')`,
+                                }}
                             >
-                                <Image
-                                    src='/slides-img-3.jpg'
-                                    fill
-                                    alt="Best Seller 1"
-                                    className="object-contain"
-                                />
-
-                                <div className="relative w-max mx-auto flex items-end h-full">
-                                    <div className="bg-[#f5f5f5] rounded flex items-center divide-x">
-                                        <button className="p-1 hover:bg-black hover:text-white transition-all duration-300">
+                                <div className="relative w-max mx-auto flex items-end h-full pb-2">
+                                    <div className="bg-[#f5f5f5] rounded flex items-center divide-x shadow-lg">
+                                        <button className="p-1 hover:bg-black hover:text-white hover:rounded-s transition-all duration-300">
                                             <ShoppingCart size={20} strokeWidth={1} />
                                         </button>
                                         <button className="p-1 hover:bg-black hover:text-white transition-all duration-300">
                                             <Heart size={20} strokeWidth={1} />
                                         </button>
-                                        <button className="p-1 hover:bg-black hover:text-white transition-all duration-300">
+                                        <button className="p-1 hover:bg-black hover:text-white hover:rounded-e transition-all duration-300">
                                             <Search size={20} strokeWidth={1} />
                                         </button>
                                     </div>
                                 </div>
-
                             </Link>
-                            {/* <button className="hidden md:block text-sm font-bold bg-white w-max px-4 py-1 mt-4">SHOP MORE</button> */}
-                        </div>
-                        {/* end of product image */}
 
-                        {/* product details */}
-                        <div>
-                            <p className="text-lg">title</p>
-                            <div className="flex justify-center">
-                                {Array.from({ length: 5 }).map(star => (
-                                    <Star fill="black" size={16} />
-                                ))}
+                            {/* product details */}
+                            <div className="px-2 space-y-1 mt-2">
+                                <p className="font-medium">${product.price}</p>
+                                <p className="text-accent">{product.category}</p>
+                                <p className="font-semibold">{product.title}</p>
                             </div>
-                            <p className="text-lg">$36.00</p>
-                        </div>
-                        {/* end of product details */}
+                            {/* end of product details */}
+                        </SwiperSlide>
+                    ))}
+                    <div
+                        slot="container-start"
+                        className="flex justify-center gap-2 mb-4">
+                        <SwiperNavButtons />
                     </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className="text-center space-y-1">
-                        {/* product image */}
-                        <div className="relative h-[120px] mb-4 py-2">
-                            <Link
-                                href='/'
-                                className=""
-                            >
-                                <Image
-                                    src='/slides-img-3.jpg'
-                                    fill
-                                    alt="Best Seller 1"
-                                    className="object-contain"
-                                />
+                </Swiper>
+                {/* end of product listing */}
+            </section>
+        )
+    }
 
-                                <div className="relative w-max mx-auto flex items-end h-full">
-                                    <div className="bg-[#f5f5f5] rounded flex items-center divide-x">
-                                        <button className="p-1 hover:bg-black hover:text-white transition-all duration-300">
-                                            <ShoppingCart size={20} strokeWidth={1} />
-                                        </button>
-                                        <button className="p-1 hover:bg-black hover:text-white transition-all duration-300">
-                                            <Heart size={20} strokeWidth={1} />
-                                        </button>
-                                        <button className="p-1 hover:bg-black hover:text-white transition-all duration-300">
-                                            <Search size={20} strokeWidth={1} />
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </Link>
-                            {/* <button className="hidden md:block text-sm font-bold bg-white w-max px-4 py-1 mt-4">SHOP MORE</button> */}
-                        </div>
-                        {/* end of product image */}
-
-                        {/* product details */}
-                        <div>
-                            <p className="text-lg">title</p>
-                            <div className="flex justify-center">
-                                {Array.from({ length: 5 }).map(star => (
-                                    <Star fill="black" size={16} />
-                                ))}
-                            </div>
-                            <p className="text-lg">$36.00</p>
-                        </div>
-                        {/* end of product details */}
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className="text-center space-y-1">
-                        {/* product image */}
-                        <div className="relative h-[120px] mb-4 py-2">
-                            <Link
-                                href='/'
-                                className=""
-                            >
-                                <Image
-                                    src='/slides-img-3.jpg'
-                                    fill
-                                    alt="Best Seller 1"
-                                    className="object-contain"
-                                />
-
-                                <div className="relative w-max mx-auto flex items-end h-full">
-                                    <div className="bg-[#f5f5f5] rounded flex items-center divide-x">
-                                        <button className="p-1 hover:bg-black hover:text-white transition-all duration-300">
-                                            <ShoppingCart size={20} strokeWidth={1} />
-                                        </button>
-                                        <button className="p-1 hover:bg-black hover:text-white transition-all duration-300">
-                                            <Heart size={20} strokeWidth={1} />
-                                        </button>
-                                        <button className="p-1 hover:bg-black hover:text-white transition-all duration-300">
-                                            <Search size={20} strokeWidth={1} />
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </Link>
-                            {/* <button className="hidden md:block text-sm font-bold bg-white w-max px-4 py-1 mt-4">SHOP MORE</button> */}
-                        </div>
-                        {/* end of product image */}
-
-                        {/* product details */}
-                        <div>
-                            <p className="text-lg">title</p>
-                            <div className="flex justify-center">
-                                {Array.from({ length: 5 }).map(star => (
-                                    <Star fill="black" size={16} />
-                                ))}
-                            </div>
-                            <p className="text-lg">$36.00</p>
-                        </div>
-                        {/* end of product details */}
-                    </div>
-                </SwiperSlide>
-                <div
-                    slot="container-start"
-                    className="flex justify-center gap-2 mb-4">
-                    <SwiperNavButtons />
-                </div>
-            </Swiper>
-            {/* end of product listing */}
-        </section>
-    )
 }
 
 function SwiperNavButtons() {
