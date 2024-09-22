@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import bestsellersReducer from '@/lib/features/bestsellers/bestsellersSlice';
-import categoriesReducer from '@/lib/features/categories/categoriesSlice'
+import categoryNamesReducer from '@/lib/features/categories/categoryNamesSlice';
 
 export const makeStore = () => {
     return configureStore({
         reducer: {
             bestsellersReducer,
-            categoriesReducer,
+            categoryNamesReducer,
         },
     })
 }

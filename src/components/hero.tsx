@@ -17,7 +17,7 @@ import 'swiper/css/effect-fade';
 import '../app/css/hero-swiper.css'
 
 import { useAppSelector, useAppDispatch } from '@/lib/hooks';
-import { fetchCategories } from '@/lib/features/categories/categoriesSlice';
+import { fetchCategoryNames } from '@/lib/features/categories/categoryNamesSlice';
 
 type SlidesProps = {
     imgSrc: string
@@ -35,12 +35,12 @@ const slides: SlidesProps[] = [
 
 export default function Hero() {
 
-    const { categories, status, error } = useAppSelector(state => state.categoriesReducer);
+    const { categories, status, error } = useAppSelector(state => state.categoryNamesReducer);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
         if (status === 'idle') {
-            dispatch(fetchCategories());
+            dispatch(fetchCategoryNames());
         }
     }, []);
 
@@ -51,6 +51,7 @@ export default function Hero() {
     }
 
     // TODO: pagination bullet visibility
+    // TODO: error handling
 
     return (
         <section>

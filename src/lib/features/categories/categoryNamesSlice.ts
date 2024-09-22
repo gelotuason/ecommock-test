@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
-type Categories = string[]
+type CategoryNames = string[]
 
-type CategoriesState = {
-    categories: Categories
+type CategoryNamesState = {
+    categories: CategoryNames
     status: 'idle' | 'loading' | 'succeeded' | 'failed'
     error: string | null,
 }
@@ -13,29 +13,29 @@ const initialState = {
     categories: [],
     status: 'idle',
     error: null
-} satisfies CategoriesState as CategoriesState
+} satisfies CategoryNamesState as CategoryNamesState
 
-const categoriesSlice = createSlice({
+const categoryNamesSlice = createSlice({
     name: 'categories',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchCategories.pending, (state) => {
+            .addCase(fetchCategoryNames.pending, (state) => {
                 state.status = 'loading';
             })
-            .addCase(fetchCategories.fulfilled, (state, action: PayloadAction<Categories>) => {
+            .addCase(fetchCategoryNames.fulfilled, (state, action: PayloadAction<CategoryNames>) => {
                 state.status = 'succeeded';
                 state.categories = action.payload;
             })
-            .addCase(fetchCategories.rejected, (state, action: PayloadAction<string | unknown>) => {
+            .addCase(fetchCategoryNames.rejected, (state, action: PayloadAction<string | unknown>) => {
                 state.status = 'failed';
                 state.error = action.payload as string;
             });
     }
 })
 
-export const fetchCategories = createAsyncThunk('categories/fetchCategories', async (_, { rejectWithValue }) => {
+export const fetchCategoryNames = createAsyncThunk('categories/fetchCategoryNames', async (_, { rejectWithValue }) => {
     try {
         const response = await axios.get('https://fakestoreapi.com/products/categories');
 
@@ -52,4 +52,4 @@ export const fetchCategories = createAsyncThunk('categories/fetchCategories', as
 }
 )
 
-export default categoriesSlice.reducer;
+export default categoryNamesSlice.reducer;
