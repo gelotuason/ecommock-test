@@ -1,94 +1,60 @@
 'use client';
 
+import { useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import '../app/css/category-swiper.css'
+import '../app/css/category-swiper.css';
+
+import { useAppSelector, useAppDispatch } from "@/lib/hooks";
+import { fetchSingleProductInCategory } from "@/lib/features/categories/categoryModelsSlice";
 
 export default function Categories() {
-    return (
-        <section className="p-4">
-            {/* product listing */}
-            <Swiper
-                modules={[Navigation]}
-                spaceBetween={20}
-                slidesPerView={2}
-                navigation={{ enabled: true }
-                }
-            >
-                <SwiperSlide>
-                    <div className="text-center">
-                        {/* product image */}
-                        <div className="relative h-[128px] mb-1">
-                            <Link
-                                href='/'
-                            >
-                                <Image
-                                    src='/slides-img-1.jpg'
-                                    fill
-                                    alt="Category Name"
-                                    className="object-contain rounded-full"
-                                />
-                            </Link>
-                        </div>
-                        {/* end of product image */}
+    const { categoryModels, status, error } = useAppSelector(state => state.categoryModelsReducer);
+    const dispatch = useAppDispatch();
 
-                        {/* category name */}
-                        <Link href='/' className="text-lg">title</Link>
-                        {/* category name */}
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className="text-center">
-                        {/* product image */}
-                        <div className="relative h-[128px] mb-1">
-                            <Link
-                                href='/'
-                            >
-                                <Image
-                                    src='/slides-img-1.jpg'
-                                    fill
-                                    alt="Category Name"
-                                    className="object-contain rounded-full"
-                                />
-                            </Link>
-                        </div>
-                        {/* end of product image */}
+    useEffect(() => {
+        if (status === 'idle') {
+            dispatch(fetchSingleProductInCategory());
+        }
+    });
 
-                        {/* category name */}
-                        <Link href='/' className="text-lg">title</Link>
-                        {/* category name */}
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className="text-center">
-                        {/* product image */}
-                        <div className="relative h-[128px] mb-1">
-                            <Link
-                                href='/'
-                            >
-                                <Image
-                                    src='/slides-img-1.jpg'
-                                    fill
-                                    alt="Category Name"
-                                    className="object-contain rounded-full"
-                                />
-                            </Link>
-                        </div>
-                        {/* end of product image */}
-
-                        {/* category name */}
-                        <Link href='/' className="text-lg">title</Link>
-                        {/* category name */}
-                    </div>
-                </SwiperSlide>
-            </Swiper>
-            {/* end of product listing */}
-        </section >
-    )
+    if (status === 'failed') {
+        return (
+            <section className="px-4 py-8 text-center">
+                <h1 className="text-lg mb-3 font-medium">Our Collections</h1>
+                <p>{error}</p>
+            </section>
+        )
+    } else {
+        return (
+            <section className="px-4 py-8">
+                <h1 className="text-lg mb-3 text-center font-medium">Our Collections</h1>
+                <Swiper
+                    modules={[Navigation]}
+                    spaceBetween={20}
+                    slidesPerView={2}
+                    navigation={{ enabled: true }}
+                >
+                    {categoryModels && categoryModels.map(categoryModel => (
+                        <SwiperSlide>
+                            <div className="text-center">
+                                <Link
+                                    href='/'
+                                    className="bg-white flex mb-1 p-2 rounded-full"
+                                >
+                                    <img src={categoryModel.image} alt={categoryModel.category} className="h-[100px] w-[60px] mx-auto" />
+                                </Link>
+                                <p className="text-lg">{categoryModel.category}</p>
+                            </div>
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            </section >
+        )
+    }
 }
