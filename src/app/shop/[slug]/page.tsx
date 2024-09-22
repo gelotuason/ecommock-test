@@ -1,12 +1,10 @@
 'use client';
 
 import { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
 
 import Categories from "@/components/categories";
 
-import { ListFilter, ArrowDownUp, LayoutGrid, List, Star, Heart, Search, ShoppingCart } from "lucide-react";
+import { ListFilter, ArrowDownUp, LayoutGrid, List } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
@@ -31,10 +29,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
+import ProductList from "@/components/product-list";
 
 type Checked = DropdownMenuCheckboxItemProps["checked"];
 
 export default function Shop({ params }: { params: { slug: string } }) {
+
     const [showBestselling, setShowBestselling] = useState<Checked>(false);
     const [showAtoZ, setShowAtoZ] = useState<Checked>(false);
     const [showZtoA, setShowZtoA] = useState<Checked>(false);
@@ -43,7 +43,6 @@ export default function Shop({ params }: { params: { slug: string } }) {
 
     return (
         <main>
-            {/* breadcrumb */}
             <section
                 className="bg-cover bg-no-repeat h-32 flex flex-col justify-center items-center text-white"
                 style={{
@@ -67,11 +66,9 @@ export default function Shop({ params }: { params: { slug: string } }) {
                     </BreadcrumbList>
                 </Breadcrumb>
             </section>
-            {/* end of breadcrumb */}
 
             <Categories />
 
-            {/* product list */}
             <section className="px-4 py-10">
                 {/* control bar */}
                 <div className="flex justify-between items-center">
@@ -148,201 +145,8 @@ export default function Shop({ params }: { params: { slug: string } }) {
                 </div>
                 {/* end of control bar */}
 
-                {/* products */}
-                <div className="grid grid-cols-2 gap-x-4 gap-y-4 text-center">
-                    {/* product 1 */}
-                    <div>
-                        {/* product image */}
-                        <div className="relative h-[120px] mb-2 py-2">
-                            <Link
-                                href='/'
-                            >
-                                <Image
-                                    src='/slides-img-3.jpg'
-                                    fill
-                                    alt="Best Seller 1"
-                                    className="object-contain"
-                                />
-
-                                <div className="relative w-max mx-auto flex items-end h-full">
-                                    <div className="bg-[#f5f5f5] rounded flex items-center divide-x">
-                                        <button className="p-1 hover:bg-black hover:text-white transition-all duration-300">
-                                            <ShoppingCart size={20} strokeWidth={1} />
-                                        </button>
-                                        <button className="p-1 hover:bg-black hover:text-white transition-all duration-300">
-                                            <Heart size={20} strokeWidth={1} />
-                                        </button>
-                                        <button className="p-1 hover:bg-black hover:text-white transition-all duration-300">
-                                            <Search size={20} strokeWidth={1} />
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </Link>
-                            {/* <button className="hidden md:block text-sm font-bold bg-white w-max px-4 py-1 mt-4">SHOP MORE</button> */}
-                        </div>
-                        {/* end of product image */}
-
-                        {/* product details */}
-                        <div>
-                            <p className="text-lg">title</p>
-                            <div className="flex justify-center">
-                                {Array.from({ length: 5 }).map(star => (
-                                    <Star fill="black" size={16} />
-                                ))}
-                            </div>
-                            <p className="text-lg">$36.00</p>
-                        </div>
-                        {/* end of product details */}
-                    </div>
-                    {/* end of product 1 */}
-
-                    {/* product 2 */}
-                    <div>
-                        {/* product image */}
-                        <div className="relative h-[120px] mb-2 py-2">
-                            <Link
-                                href='/'
-                                className=""
-                            >
-                                <Image
-                                    src='/slides-img-3.jpg'
-                                    fill
-                                    alt="Best Seller 1"
-                                    className="object-contain"
-                                />
-
-                                <div className="relative w-max mx-auto flex items-end h-full">
-                                    <div className="bg-[#f5f5f5] rounded flex items-center divide-x">
-                                        <button className="p-1 hover:bg-black hover:text-white transition-all duration-300">
-                                            <ShoppingCart size={20} strokeWidth={1} />
-                                        </button>
-                                        <button className="p-1 hover:bg-black hover:text-white transition-all duration-300">
-                                            <Heart size={20} strokeWidth={1} />
-                                        </button>
-                                        <button className="p-1 hover:bg-black hover:text-white transition-all duration-300">
-                                            <Search size={20} strokeWidth={1} />
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </Link>
-                            {/* <button className="hidden md:block text-sm font-bold bg-white w-max px-4 py-1 mt-4">SHOP MORE</button> */}
-                        </div>
-                        {/* end of product image */}
-
-                        {/* product details */}
-                        <div>
-                            <p className="text-lg">title</p>
-                            <div className="flex justify-center">
-                                {Array.from({ length: 5 }).map(star => (
-                                    <Star fill="black" size={16} />
-                                ))}
-                            </div>
-                            <p className="text-lg">$36.00</p>
-                        </div>
-                        {/* end of product details */}
-                    </div>
-                    {/* end of product 2 */}
-
-                    {/* product 3 */}
-                    <div>
-                        {/* product image */}
-                        <div className="relative h-[120px] mb-2 py-2">
-                            <Link
-                                href='/'
-                                className=""
-                            >
-                                <Image
-                                    src='/slides-img-3.jpg'
-                                    fill
-                                    alt="Best Seller 1"
-                                    className="object-contain"
-                                />
-
-                                <div className="relative w-max mx-auto flex items-end h-full">
-                                    <div className="bg-[#f5f5f5] rounded flex items-center divide-x">
-                                        <button className="p-1 hover:bg-black hover:text-white transition-all duration-300">
-                                            <ShoppingCart size={20} strokeWidth={1} />
-                                        </button>
-                                        <button className="p-1 hover:bg-black hover:text-white transition-all duration-300">
-                                            <Heart size={20} strokeWidth={1} />
-                                        </button>
-                                        <button className="p-1 hover:bg-black hover:text-white transition-all duration-300">
-                                            <Search size={20} strokeWidth={1} />
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </Link>
-                            {/* <button className="hidden md:block text-sm font-bold bg-white w-max px-4 py-1 mt-4">SHOP MORE</button> */}
-                        </div>
-                        {/* end of product image */}
-
-                        {/* product details */}
-                        <div>
-                            <p className="text-lg">title</p>
-                            <div className="flex justify-center">
-                                {Array.from({ length: 5 }).map(star => (
-                                    <Star fill="black" size={16} />
-                                ))}
-                            </div>
-                            <p className="text-lg">$36.00</p>
-                        </div>
-                        {/* end of product details */}
-                    </div>
-                    {/* end of product 3 */}
-
-                    {/* product 4 */}
-                    <div>
-                        {/* product image */}
-                        <div className="relative h-[120px] mb-2 py-2">
-                            <Link
-                                href='/'
-                            >
-                                <Image
-                                    src='/slides-img-3.jpg'
-                                    fill
-                                    alt="Best Seller 1"
-                                    className="object-contain"
-                                />
-
-                                <div className="relative w-max mx-auto flex items-end h-full">
-                                    <div className="bg-[#f5f5f5] rounded flex items-center divide-x">
-                                        <button className="p-1 hover:bg-black hover:text-white transition-all duration-300">
-                                            <ShoppingCart size={20} strokeWidth={1} />
-                                        </button>
-                                        <button className="p-1 hover:bg-black hover:text-white transition-all duration-300">
-                                            <Heart size={20} strokeWidth={1} />
-                                        </button>
-                                        <button className="p-1 hover:bg-black hover:text-white transition-all duration-300">
-                                            <Search size={20} strokeWidth={1} />
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </Link>
-                            {/* <button className="hidden md:block text-sm font-bold bg-white w-max px-4 py-1 mt-4">SHOP MORE</button> */}
-                        </div>
-                        {/* end of product image */}
-
-                        {/* product details */}
-                        <div>
-                            <p className="text-lg">title</p>
-                            <div className="flex justify-center">
-                                {Array.from({ length: 5 }).map(star => (
-                                    <Star fill="black" size={16} />
-                                ))}
-                            </div>
-                            <p className="text-lg">$36.00</p>
-                        </div>
-                        {/* end of product details */}
-                    </div>
-                    {/* end of product 4 */}
-                </div>
-                {/* end of products */}
+                <ProductList key={params.slug} category={params.slug} />
             </section>
-            {/* end of product list */}
         </main >
     )
 }
