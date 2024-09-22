@@ -18,10 +18,8 @@ export default function Categories() {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (status === 'idle') {
-            dispatch(fetchSingleProductInCategory());
-        }
-    });
+        dispatch(fetchSingleProductInCategory());
+    }, [dispatch]);
 
     if (status === 'failed') {
         return (
@@ -30,7 +28,9 @@ export default function Categories() {
                 <p>{error}</p>
             </section>
         )
-    } else {
+    }
+
+    if (status === 'succeeded') {
         return (
             <section className="px-4 py-8">
                 <h1 className="text-lg mb-3 text-center font-medium">Our Collections</h1>

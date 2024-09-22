@@ -20,10 +20,8 @@ export default function Bestsellers() {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (status === 'idle') {
-            dispatch(fetchBestsellers());
-        }
-    }, []);
+        dispatch(fetchBestsellers());
+    }, [dispatch]);
 
     // TODO: swiper nav button disabled on last slide
 
@@ -32,17 +30,18 @@ export default function Bestsellers() {
         return (
             <section className="px-3 py-4">
                 <h1 className="text-4xl text-center">Bestsellers</h1>
-                <h2 className="text-lg text-center text-accent mb-4">Don't miss our bestsellers of the month!</h2>
+                <h2 className="text-lg text-center text-accent mb-4">Don&apos;t miss our bestsellers of the month!</h2>
                 <p className="text-center">{error}</p>
             </section>
         )
-    } else {
+    }
+
+    if (status === 'succeeded') {
         return (
             <section className="px-3 py-4">
                 <h1 className="text-4xl text-center">Bestsellers</h1>
-                <h2 className="text-lg text-center text-accent mb-4">Don't miss our bestsellers of the month!</h2>
+                <h2 className="text-lg text-center text-accent mb-4">Don&apos;t miss our bestsellers of the month!</h2>
 
-                {/* product listing */}
                 <Swiper
                     modules={[Navigation, Pagination]}
                     spaceBetween={10}
@@ -50,7 +49,7 @@ export default function Bestsellers() {
                     navigation={{ enabled: false }}
                     pagination={{ clickable: true }}
                 >
-                    {products && products.map((product) => (
+                    {products.map((product) => (
                         <SwiperSlide key={product.id}>
                             <Link
                                 href='/'
@@ -74,26 +73,23 @@ export default function Bestsellers() {
                                 </div>
                             </Link>
 
-                            {/* product details */}
                             <div className="px-2 space-y-1 mt-2">
                                 <p className="font-medium">${product.price}</p>
                                 <p className="text-accent">{product.category}</p>
                                 <p className="font-semibold">{product.title}</p>
                             </div>
-                            {/* end of product details */}
                         </SwiperSlide>
                     ))}
+
                     <div
                         slot="container-start"
                         className="flex justify-center gap-2 mb-4">
                         <SwiperNavButtons />
                     </div>
                 </Swiper>
-                {/* end of product listing */}
             </section>
         )
     }
-
 }
 
 function SwiperNavButtons() {
