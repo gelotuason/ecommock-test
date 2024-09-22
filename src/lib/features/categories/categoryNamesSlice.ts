@@ -16,7 +16,7 @@ const initialState = {
 } satisfies CategoryNamesState as CategoryNamesState
 
 const categoryNamesSlice = createSlice({
-    name: 'categories',
+    name: 'categoryNames',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
